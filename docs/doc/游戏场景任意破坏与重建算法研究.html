@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <title> - Hexo</title>
+    <link rel="stylesheet" href="/lqq.github.io/assets/web/assets/mobirise-icons/mobirise-icons.css">
+    <link rel="stylesheet" href="/lqq.github.io/assets/tether/tether.min.css">
+    <link rel="stylesheet" href="/lqq.github.io/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lqq.github.io/assets/bootstrap/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="/lqq.github.io/assets/bootstrap/css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="/lqq.github.io/assets/theme/css/style.css">
+    <link rel="stylesheet" href="/lqq.github.io/assets/mobirise/css/mbr-additional.css" type="text/css">
+    <link rel="stylesheet" href="/lqq.github.io/assets/mystyle.css">
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+    <section class="mbr-section" id="page-header">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <h1 class="mbr-section-title align-center pb-3 mbr-fonts-style display-2"></h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mbr-section" id="page-body">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-10 mbr-fonts-style display-7">
+                    <h1 id="优化方案"><a href="#优化方案" class="headerlink" title="优化方案"></a>优化方案</h1><h2 id="享元模式"><a href="#享元模式" class="headerlink" title="享元模式"></a>享元模式</h2><p>使用享元模式来共享游戏模型中相同的数据。例如，在游戏的森林场景里，有很多树的模型共享了相同的数据，这些模型如果都存储这些数据的话，那么需要占用大量的存储空间。使用享元模式之后，这些模型共享相同的内部状态，每个模型只要存储不同的外部状态即可。</p>
+<div align="center">
+    <img src="flyweight-tree-model.png">
+</div>
+
+
+
+<h2 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h2><p>将一些关键参数转换为 2 的指数幂，那么原来的乘法运算转换为左移操作，除法运算转换为右移操作，求余运算转换为与运算，大大提高了计算速度。</p>
+<p>这是受到 JDK 中 HashMap 的启发，HashMap 将数组长度转换为最小的 2 的指数幂，那么在求一个节点所在的数组下标的时候，就可以将原来的求余运算转换为位与运算。</p>
+<div align="center">
+    <img src="3.gif" width="300px" display="inline"> 
+    <img src="4.png"  width="300px" display="inline">
+</div>
+
+
+
+<h2 id="乐观策略"><a href="#乐观策略" class="headerlink" title="乐观策略"></a>乐观策略</h2><p>在破坏模型之后需要进行一个分隔分析来判断模型是否被破坏成多个部分，如果是的话，就要为每个部分新建模型。</p>
+<p>一种悲观的策略是进行一次全局的深度优先搜索，而我采用的是乐观策略，先对破坏位置进行分析，如果没有被分割成多个部分，那么整体一定没有被分割成多个部分，否则就改为进行一次全局的分析。</p>
+<p>这是受到乐观锁的启发，在这里全局的分析相当于加锁，而我们应该尽量避免加锁操作，因为代价很高，所以就先尝试不加锁，只有在发生冲突时才进行加锁。</p>
+<p>下图中，左边是全局分隔分析示意图，右边是局部分隔分析示意图。</p>
+<div align="center">
+    <img src="1.gif" width="300px" display="inline"> 
+    <img src="2.gif"  width="300px" display="inline">
+</div>
+
+<h2 id="递归优化"><a href="#递归优化" class="headerlink" title="递归优化"></a>递归优化</h2><p>将原来的递归操作转换为迭代操作，避免 Stack Overflow。</p>
+<p>模型分隔分析需要进行一次全局的深度优先搜索。在未优化之前，采用的是递归的方式实现，但是因为需要搜索上百万个节点，因此出现了 StackOverflow。使用迭代改进之后，就不需要将一些数据压入递归栈中，基本不消耗内存。</p>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="/lqq.github.io/assets/web/assets/jquery/jquery.min.js"></script>
+    <script src="/lqq.github.io/assets/popper/popper.min.js"></script>
+    <script src="/lqq.github.io/assets/tether/tether.min.js"></script>
+    <script src="/lqq.github.io/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/lqq.github.io/assets/smoothscroll/smooth-scroll.js"></script>
+    <script src="/lqq.github.io/assets/parallax/jarallax.min.js"></script>
+    <script src="/lqq.github.io/assets/theme/js/script.js"></script>
+</body>
+</html>
